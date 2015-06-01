@@ -1,3 +1,5 @@
+!contents -R2 -g -p -f -h
+
 [[!img http://files/images/OASIS.jpg][PageStructureTemplate]]
 !3 ''Open Automation Source Integrated Suite, taking the fun out of automated scripted testing''
 
@@ -11,11 +13,39 @@
 | [[Oasis Examples][OasisExamples]] | ''Oasis Examples''|
 
 
-!contents -R2 -g -p -f -h
+!*> !style_blue('''Given''') !style_green('''Provide information on what the starting point is''')
+<insert the testscript for the GIVEN situation>
+*!
+
+!*> !style_blue('''When''') !style_green('''Describe the main goal of the test''') 
+<insert the testscript for the WHEN situation>
+*!
+
+!*> !style_blue('''Then''') !style_green('''Describe the expected result''') 
+
+<insert the testscript for the then situation>
+
+*!
+
+
+
+!*> !style_blue('''Cleanup''') !style_green('''purging to make test repeatable''') 
 
 
 
 
+*!
+
+!***> Preset variables
+!define TEST_SYSTEM {slim}
+!define BROWSER {firefox}
+!pomFile pom.xml@runtime
+!classpath
+
+!define COLLAPSE_SETUP {true}
+!define COLLAPSE_TEARDOWN {true}
+
+***!
 
 
 

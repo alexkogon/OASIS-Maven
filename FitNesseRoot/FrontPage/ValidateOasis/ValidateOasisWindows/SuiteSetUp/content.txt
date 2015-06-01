@@ -1,0 +1,16 @@
+!contents -R2 -g -p -f -h
+
+!| import | 
+| com.xebia.incubator.xebium | 
+| com.xebia.sikuli | 
+| org.synthuse | 
+| org.qedsys.fitnesse |
+| org.oasis.fitnesse |
+| org.qedsys.file |
+
+|import|
+|com.github.andreptb.fitnesse| 
+
+|library|
+|jdbc fixture|
+

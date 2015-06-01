@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+
+| script | sikuli driver fixture | 
+| set wait time to | 8000 |
+| wait click | !-<img src="SimpleSikuliTest1?sik&img=startButton.png" />-! |
+| delay | 1000 | 
+| type | calculator |
+| keyDown | ENTER | 
+| keyUp | ENTER | 
+| set target x offset to | 100 | set target y offset to | -143 |
+| wait click | !-<img src="SimpleSikuliTest1?sik&img=calc.png" />-! |
+
+
