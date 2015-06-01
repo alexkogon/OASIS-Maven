@@ -1,7 +1,0 @@
-TFORTSSC
-jdbc:oracle:thin:@lrv140mk.europe.intranet:1521:TFORTSSC
-oracle.jdbc.driver.OracleDriver
-FORTIFYSRV1_USER
-Welcome01__
-354
-2014-11-14 15:40:42.373145
