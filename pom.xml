@@ -470,23 +470,7 @@
 			<version>3.0.5</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- fitnesse JDBC dependency -->
-		<dependency>
-			<groupId>com.github.andreptb</groupId>
-			<artifactId>fitnesse-jdbc-slim</artifactId>
-			<version>0.0.2</version>
-		</dependency>
-
-		<!-- ORACLE database driver -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.3</version>
-		</dependency>
 	</dependencies>
-
-
 
 	<build>
 		<outputDirectory>build</outputDirectory>
@@ -497,7 +481,6 @@
 				<version>1.0-beta-7</version>
 			</extension>
 		</extensions>
-
 
 		<plugins>
 			<plugin>
@@ -548,7 +531,6 @@
 				</plugins>
 			</build>
 		</profile>
-
 		<profile>
 			<id>ide</id>
 			<activation>
@@ -577,7 +559,6 @@
 				</plugins>
 			</build>
 		</profile>
-
 		<profile>
 			<id>fitnesse</id>
 			<build>
@@ -629,7 +610,6 @@
 				</dependency>
 			</dependencies>
 		</profile>
-
 		<profile>
 			<id>fitnesse-integration</id>
 			<activation>
