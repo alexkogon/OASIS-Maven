@@ -11,3 +11,5 @@
 | wait click | !-<img src="SimpleSikuliTest1?sik&img=calc.png" />-! |
 
 
+
+

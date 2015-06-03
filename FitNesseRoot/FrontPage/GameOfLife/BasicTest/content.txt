@@ -1,0 +1,23 @@
+!contents -R2 -g -p -f -h
+!define slim.timeout {60}
+
+| script | selenium driver fixture |
+| start browser | firefox | on url | http://192.168.10.18:8080/ |
+| do | open | on | /gameoflife/ |
+| ensure | do | clickAndWait | on | link=New Game |
+| ensure | do | click | on | name=cell_1_1 |
+| ensure | do | click | on | name=cell_1_2 |
+| ensure | do | click | on | name=cell_2_2 |
+| ensure | do | click | on | name=cell_2_1 |
+| check | is | verifyValue | on | name=cell_2_1 | on |
+| ensure | do | clickAndWait | on | id=submit |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[2]/td[2]-! | * |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[3]/td[2]-! | * |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[2]/td[3]-! | * |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[3]/td[3]-! | * |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[3]/td-! | . |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[2]/td-! | . |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr/td[3]-! | . |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr/td[2]-! | . |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr/td[1]-! | . |
+| stop browser |

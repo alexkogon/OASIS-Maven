@@ -1,0 +1,15 @@
+!contents -R2 -g -p -f -h
+| script | selenium driver fixture |
+| start browser | firefox | on url | http://192.168.10.18:8080/ |
+| do | open | on | /gameoflife/home |
+| ensure | do | clickAndWait | on | link=New Game |
+| ensure | do | click | on | name=cell_0_0 |
+| ensure | do | click | on | name=cell_1_1 |
+| ensure | do | click | on | name=cell_2_0 |
+| ensure | do | clickAndWait | on | id=submit |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[2]/td[2]-! | * |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[3]/td-! | * |
+| ensure | do | clickAndWait | on | id=submit |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[2]/td-! | * |
+| check | is | verifyText | on | !-//table[@id='grid']/tbody/tr[3]/td-! | . |
+| stop browser |

@@ -1,0 +1,36 @@
+!contents -R2 -g -p -f -h
+
+Feature: Game of life iterates, validating rule "Any live cell with fewer than two live neighbours dies, as if caused by underpopulation"
+Given the customer starts the application
+When he fills in the game of life matrix and presses the go button
+Then the rule dying cells is valid and verified
+Examples:
+|Start cell   |neighbours|result    |
+|top left cell|1        |Cell dies |
+|top left cell|3        |Cell lives|
+|top left cell|2        |Cell lives|
+
+|A1|B1|C1|
+|A2|B2|C2|
+|A3|B3|C3|
+
+|A1|B1|C1|A2|B2|C2|A3|B3|C3|Expected result for A1|
+|1 |0 |0 |0 |0 |0 |0 |0 |0 |0                     |
+|1 |1 |0 |0 |0 |0 |0 |0 |0 |0                     |
+|1 |1 |0 |0 |1 |0 |0 |0 |0 |1                     |
+|1 |1 |0 |1 |0 |1 |0 |0 |0 |1                     |
+
+
+
+|script       |selenium driver fixture                                             |
+|start browser|firefox|on url      |http://192.168.10.18:8080/                     |
+|do           |open   |on          |/gameoflife/                                   |
+|ensure       |do     |clickAndWait|on|link=New Game                               |
+|ensure       |do     |click       |on|name=cell_1_1                               |
+|ensure       |do     |click       |on|name=cell_1_2                               |
+|ensure       |do     |click       |on|name=cell_2_2                               |
+|ensure       |do     |click       |on|name=cell_2_1                               |
+|check        |is     |verifyValue |on|name=cell_2_1                            |on|
+|ensure       |do     |clickAndWait|on|id=submit                                   |
+|check        |is     |verifyText  |on|!-//table[@id='grid']/tbody/tr[3]/td[2]-!|* |
+|stop browser                                                                      |
