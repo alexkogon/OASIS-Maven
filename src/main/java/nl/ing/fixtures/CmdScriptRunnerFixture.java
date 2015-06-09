@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * This FIT test fixture provides commandline features (shell-like behavior)
  * from a FIT table. It provides features for running commands, creating files,
@@ -24,6 +21,7 @@ import org.slf4j.LoggerFactory;
  * | run command | Filecopy.bat C:\Test\FileToCopy.txt C:\Test\ResultOfCopy.txt |<br/>
  * | create file | Testfile.txt | with | This is file content! |<br/>
  * | open file | NewTestfile.txt |<br/>
+ * | make file executable |<br/>
  * | add line to file | This is line 1 |<br/>
  * | add line to file | This is line 2 |<br/>
  * | add line to file | This is line 3 |<br/>
@@ -40,12 +38,10 @@ import org.slf4j.LoggerFactory;
  */
 public class CmdScriptRunnerFixture {
 
-	private static final Logger LOG = LoggerFactory
-			.getLogger(CmdScriptRunnerFixture.class);
-
 	private static final int lineLength = 20;
 	private String filename;
 	private boolean isFileOpenForWriting = false;
+	private boolean makeExecutable = false;
 	private List<String> fileLines;
 	private String directory = "";
 
@@ -254,7 +250,7 @@ public class CmdScriptRunnerFixture {
 	public void addLineToFile(String line) throws CommandFixtureException {
 		
 		if ( !this.isFileOpenForWriting ) {
-			throw new CommandFixtureException("No file has been opened for writing.");
+			throw new CommandFixtureException("No open file available for writing.");
 		}
 
 		if (line.length() <= CmdScriptRunnerFixture.lineLength) {
@@ -273,7 +269,29 @@ public class CmdScriptRunnerFixture {
 		}
 		this.fileLines.add(line.trim() + System.getProperty("line.separator"));
 	}
-
+	
+	/**
+	 * <p>
+	 * Makes the opened file executable.
+	 * </p>
+	 * <p>
+	 * Markup used in Selenium: <br/>
+	 * <br/>
+	 * <b>| make file executable |</b>
+	 * </p>
+	 * 
+	 * @throws CommandFixtureException Exception thrown when there is no file opened to make executable.
+	 * @see CmdScriptRunnerFixture#openFile(String) openFile
+	 */
+	public void makeFileExecutable() throws CommandFixtureException {
+		
+		if ( !this.isFileOpenForWriting ) {
+			throw new CommandFixtureException("No open file available to make executable.");
+		}
+		
+		this.makeExecutable = true;
+	}
+	
 	/**
 	 * <p>
 	 * This method closes the opened file ({@link #openFile(String) openFile}).
@@ -298,6 +316,7 @@ public class CmdScriptRunnerFixture {
 			System.out.println("Writing and closing file");
 
 			File file = new File(this.filename);
+			file.setExecutable(this.makeExecutable);
 			FileWriter writer = new FileWriter(file);
 
 			if (this.fileLines != null && this.fileLines.size() > 0) {
@@ -308,6 +327,7 @@ public class CmdScriptRunnerFixture {
 			writer.close();
 			this.fileLines = null;
 			this.isFileOpenForWriting = false;
+			this.makeExecutable = false;
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 			throw new CommandFixtureException("Error writing and closing file with the name: " + this.filename, ioe);
