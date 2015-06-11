@@ -17,7 +17,6 @@
 | add line to file | This is line 3 |
 | write and close file |
 | wait for | 3 |
-| file | Testfile.txt | mutated before | 946080000 |
 | file | Testfile.txt | mutated after| 946080000 |
 | create executable file | NewFilecopy.bat | with | copy %1 %2|
 | create file | FileToBeCopiedByNewScript.txt | with | This is a file for the new copy test. |
