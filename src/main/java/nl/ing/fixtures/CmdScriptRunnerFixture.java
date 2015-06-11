@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This FIT test fixture provides commandline features (shell-like behavior)
  * from a FIT table. It provides features for running commands, creating files,
@@ -50,7 +53,6 @@ public class CmdScriptRunnerFixture {
 	 */
 	public CmdScriptRunnerFixture() {
 		System.out.println("---------------------------------------");
-		// LOG.info("---------------------------------------");
 		System.out.println("Running CmdScriptRunnerFixture");
 	}
 
@@ -86,8 +88,8 @@ public class CmdScriptRunnerFixture {
 	 */
 	public void setDirectoryForTest(String directory) {
 
-		if ( !directory.endsWith("\\") ) {
-			directory = directory + "\\";
+		if ( !directory.endsWith("\\") || !directory.endsWith("/") ) {
+			directory = directory + "/";
 		}
 		this.directory = directory;
 	}
@@ -312,8 +314,8 @@ public class CmdScriptRunnerFixture {
 			throw new CommandFixtureException("No file has been opened for writing.");
 		}
 
+		System.out.println("Writing and closing file");
 		try {
-			System.out.println("Writing and closing file");
 
 			File file = new File(this.filename);
 			file.setExecutable(this.makeExecutable);
@@ -331,6 +333,34 @@ public class CmdScriptRunnerFixture {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 			throw new CommandFixtureException("Error writing and closing file with the name: " + this.filename, ioe);
+		}
+	}
+
+	/**
+	 * <p>
+	 * Deletes the specified file.
+	 * </p>
+	 * <p>
+	 * Markup used in Selenium: <br/>
+	 * <br/>
+	 * <b>| delete file | Testfile.txt |</b>
+	 * </p>
+	 * 
+	 * @param filename Name of the file to be deleted.
+	 * @throws CommandFixtureException
+	 *             Exception thrown when the specified file does not exists.
+	 * @return True if the file is deleted correctly.
+	 */
+	public boolean deleteFile(String filename) throws CommandFixtureException {
+		
+		System.out.println("Deleting file \"" + filename);
+		
+		filename = directory + filename;
+		File file = new File(filename);
+		if ( file.exists() ) {
+			return file.delete();
+		} else {
+			throw new CommandFixtureException("File \"" + filename + "\" does not exist.");
 		}
 	}
 
