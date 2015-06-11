@@ -385,9 +385,11 @@ public class CmdScriptRunnerFixture {
 	 *         time.
 	 */
 	public boolean fileMutatedAfter(String filename, int time) {
-
+		
+		filename = directory + filename;
+		
 		File file = new File(filename);
-		if (file.lastModified() > (time * 1000)) {
+		if ( file.lastModified() > (time * 1000) ) {
 			return true;
 		} else {
 			return false;
@@ -415,9 +417,11 @@ public class CmdScriptRunnerFixture {
 	 *         time.
 	 */
 	public boolean fileMutatedBefore(String filename, int time) {
-
+		
+		filename = directory + filename;
+		
 		File file = new File(filename);
-		if (file.lastModified() < (time * 1000)) {
+		if ( file.lastModified() < (time * 1000) ) {
 			return true;
 		} else {
 			return false;
