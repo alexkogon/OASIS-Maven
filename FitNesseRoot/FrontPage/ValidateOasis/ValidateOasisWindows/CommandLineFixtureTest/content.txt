@@ -1,0 +1,28 @@
+!contents -R2 -g -p -f -h
+!define TEST_SYSTEM {slim}
+!oasis
+
+!define FITNESSE_CMDTESTFILES_ROOT {FitNesseRoot/files/testFiles/CmdTestFiles}
+
+| import | 
+| nl.ing.fixtures | 
+
+!| script | cmd script runner fixture |
+| set directory for test | ${FITNESSE_CMDTESTFILES_ROOT} |
+| run command | Filecopy.bat ${FITNESSE_CMDTESTFILES_ROOT}/FileToCopy.txt ${FITNESSE_CMDTESTFILES_ROOT}/ResultOfCopy.txt |
+| create file | Testfile.txt | with | BlaBlaBla |
+| open file | NewTestfile.txt |
+| add line to file | This is line 1 |
+| add line to file | This is line 2 --- abcdefghijklmnopqrstuvwxyz |
+| add line to file | This is line 3 |
+| write and close file |
+| wait for | 3 |
+| file | Testfile.txt | mutated before | 946080000 |
+| file | Testfile.txt | mutated after| 946080000 |
+| create executable file | NewFilecopy.bat | with | copy %1 %2|
+| create file | FileToBeCopiedByNewScript.txt | with | This is a file for the new copy test. |
+| run command | NewFilecopy.bat ${FITNESSE_CMDTESTFILES_ROOT}/FileToBeCopiedByNewScript.txt ${FITNESSE_CMDTESTFILES_ROOT}/ResultOfTheNewCopy.txt |
+| delete file | Testfile.txt |
+| delete file | NewTestfile.txt |
+| delete file | NewFilecopy.bat |
+| delete file | FileToBeCopiedByNewScript.txt |
