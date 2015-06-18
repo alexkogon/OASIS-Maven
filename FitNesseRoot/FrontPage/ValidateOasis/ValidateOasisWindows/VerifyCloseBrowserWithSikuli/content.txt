@@ -1,0 +1,43 @@
+!contents -R2 -g -p -f -h
+
+!*> !style_blue('''Given''') !style_green('''When deploying OASIS''')
+<insert the testscript for the GIVEN situation>
+*!
+
+!*> !style_blue('''When''') !style_green('''sikuli test is finished and the browser is closed by Xebium''') 
+
+!| script | default web driver supplier |
+| set browser | firefox |
+| $webDriver1= | new web driver |
+
+!| script | selenium driver fixture |
+| start driver | $webDriver1 | on url | http://localhost:8000 |
+| do | open | on | /files/testHtml/iFrameTest1.html |
+| ensure | do | waitForVisible | on | //input[@id='topTxt'] |
+
+
+| script | sikuli driver fixture | 
+| click | !-<img src="VerifyCloseBrowserWithSikuli?sik&img=emailadress.png" />-! |
+| type | testvalue  |
+| wait | !-<img src="VerifyCloseBrowserWithSikuli?sik&img=emailadressfilled.png" />-! |
+
+
+*!
+
+
+!*> !style_blue('''Then''') !style_green('''The browser is closed and the test finishes''') 
+
+!| script | selenium driver fixture |
+| stop browser |
+<insert the testscript for the then situation>
+
+*!
+
+
+
+!*> !style_blue('''Cleanup''') !style_green('''purging to make test repeatable''') 
+
+
+
+
+*!
