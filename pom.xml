@@ -191,7 +191,6 @@
 			<groupId>oasis</groupId>
 			<artifactId>oasis-plugin</artifactId>
 			<version>1.0</version>
-			<!-- <scope>runtime</scope> -->
 		</dependency>
 
 
